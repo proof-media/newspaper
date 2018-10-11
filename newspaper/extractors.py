@@ -770,6 +770,12 @@ class ContentExtractor(object):
 
     def calculate_best_node(self, doc):
         top_node = None
+
+        # CNBC special case
+        top_node = self.parser.getElementById(doc, 'article_body')
+        if top_node is not None:
+            return top_node
+
         nodes_to_check = self.nodes_to_check(doc)
         starting_boost = float(1.0)
         cnt = 0
